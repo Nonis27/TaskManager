@@ -1,3 +1,5 @@
+using TaskManager;
+
 namespace TaskManager
 {
     internal static class Program

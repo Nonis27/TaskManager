@@ -5,19 +5,18 @@ namespace TaskManager
 {
     public partial class Form1 : Form
     {
-        TaskManager taskManager;
+        TaskManagerData taskManagerData;
         public Form1()
         {
             InitializeComponent();
-            taskManager = new TaskManager();
+            taskManagerData = new TaskManagerData();
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
             if (textBox != null)
             {
-                TaskList.Items.Add(textBox.Text);
-                taskManager.AddTask(textBox.Text);
+                TaskList.Items.Add(taskManagerData.AddTask(textBox.Text));
             }
         }
     }

@@ -3,27 +3,26 @@ using System.Collections.Generic;
 
 namespace TaskManager
 {
-    internal class TaskManager
+    public class TaskManagerData
     {
-        struct TaskStruct
+        int NextId;
+
+        private static Dictionary<int, string> taskList = new Dictionary<int, string>();
+
+        public TaskManagerData(int nextId = 0)
         {
-            public string taskTitle;
-            public string taskDescription;
-            public int priorityLevel; // 1 = high, 2 = medium, 3 low
-            public bool completionStatus;
-            public int id;
+            NextId = nextId;
         }
 
-        static Dictionary<int, TaskStruct> TaskDict = new Dictionary<int, TaskStruct>();
-
-        TaskStruct taskStruct = new TaskStruct();
-
-        public void AddTask(string title)
+        public string AddTask(string title)
         {
-            taskStruct.id += 1;
-            taskStruct.taskTitle = title;
-            TaskDict[taskStruct.id] = taskStruct;
+            // Add task title to Dictionary
+            NextId++;
+            taskList[NextId] = title;
+
+            // Return the value for the list
+            string line = $"{NextId}. {taskList[NextId]}";
+            return line;
         }
-        
     }
 }
