@@ -23,5 +23,10 @@ namespace TaskManager
             // Return the value for the list
             return taskList[NextId];
         }
+
+        public string ReturnDetails(string details)
+        {
+            return details;
+        }
     }
 }

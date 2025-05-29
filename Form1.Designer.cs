@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             TaskList = new ListBox();
             addButton = new Button();
             textBox = new TextBox();
             label1 = new Label();
+            detailsButton = new Button();
+            NoItemSelectedError = new ErrorProvider(components);
+            ErrorTimer = new System.Windows.Forms.Timer(components);
+            ((System.ComponentModel.ISupportInitialize)NoItemSelectedError).BeginInit();
             SuspendLayout();
             // 
             // TaskList
@@ -68,18 +73,40 @@
             label1.TabIndex = 3;
             label1.Text = "label1";
             // 
+            // detailsButton
+            // 
+            detailsButton.Location = new Point(12, 222);
+            detailsButton.Name = "detailsButton";
+            detailsButton.Size = new Size(94, 29);
+            detailsButton.TabIndex = 4;
+            detailsButton.Text = "See Details";
+            detailsButton.UseVisualStyleBackColor = true;
+            detailsButton.Click += detailsButton_Click;
+            // 
+            // NoItemSelectedError
+            // 
+            NoItemSelectedError.ContainerControl = this;
+            // 
+            // ErrorTimer
+            // 
+            ErrorTimer.Tag = "";
+            ErrorTimer.Tick += ErrorTimer_Tick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
             ClientSize = new Size(942, 493);
+            Controls.Add(detailsButton);
             Controls.Add(label1);
             Controls.Add(textBox);
             Controls.Add(addButton);
             Controls.Add(TaskList);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Task Manager";
+            ((System.ComponentModel.ISupportInitialize)NoItemSelectedError).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -90,5 +117,8 @@
         private Button addButton;
         private TextBox textBox;
         private Label label1;
+        private Button detailsButton;
+        private ErrorProvider NoItemSelectedError;
+        private System.Windows.Forms.Timer ErrorTimer;
     }
 }

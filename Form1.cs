@@ -9,7 +9,12 @@ namespace TaskManager
         public Form1()
         {
             InitializeComponent();
+            // Make a reference to the TaskManagerData class
             taskManagerData = new TaskManagerData();
+
+            // Initialize timer
+            ErrorTimer.Interval = 5000;
+            ErrorTimer.Tick += ErrorTimer_Tick;
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -33,8 +38,27 @@ namespace TaskManager
                 }
                 textBox.Clear();
             }
+        }
 
-            
+        private void detailsButton_Click(object sender, EventArgs e)
+        {
+            if (TaskList.SelectedItem != null)
+            {
+                TaskDetailsForm taskDetailsForm = new TaskDetailsForm();
+                taskDetailsForm.DisplayDetails(taskManagerData.ReturnDetails("Bob"));
+                taskDetailsForm.Show();
+            }
+            else
+            {
+                NoItemSelectedError.SetError(TaskList, "No item selected.");
+                ErrorTimer.Start();
+            }
+        }
+
+        private void ErrorTimer_Tick(object sender, EventArgs e)
+        {
+            NoItemSelectedError.SetError(TaskList, "");
+            ErrorTimer.Stop();
         }
     }
 }
