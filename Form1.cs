@@ -14,10 +14,27 @@ namespace TaskManager
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            if (textBox != null)
+            bool titleExists = false;
+            string newTitle = textBox.Text;
+            foreach (var task in TaskManagerData.taskList.Values)
             {
-                TaskList.Items.Add(taskManagerData.AddTask(textBox.Text));
+                if (task == newTitle)
+                {
+                    titleExists = true;
+                    break;
+                }
             }
+
+            if (!string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                if (!titleExists)
+                {
+                    TaskList.Items.Add(taskManagerData.AddTask(textBox.Text));
+                }
+                textBox.Clear();
+            }
+
+            
         }
     }
 }

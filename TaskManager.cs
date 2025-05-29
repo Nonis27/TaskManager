@@ -7,7 +7,7 @@ namespace TaskManager
     {
         int NextId;
 
-        private static Dictionary<int, string> taskList = new Dictionary<int, string>();
+        public static Dictionary<int, string> taskList = new Dictionary<int, string>();
 
         public TaskManagerData(int nextId = 0)
         {
@@ -21,8 +21,7 @@ namespace TaskManager
             taskList[NextId] = title;
 
             // Return the value for the list
-            string line = $"{NextId}. {taskList[NextId]}";
-            return line;
+            return taskList[NextId];
         }
     }
 }
