@@ -36,20 +36,25 @@
             detailsButton = new Button();
             NoItemSelectedError = new ErrorProvider(components);
             ErrorTimer = new System.Windows.Forms.Timer(components);
+            monthCalendar1 = new MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)NoItemSelectedError).BeginInit();
             SuspendLayout();
             // 
             // TaskList
             // 
+            TaskList.BackColor = SystemColors.HighlightText;
+            TaskList.DisplayMember = "Value";
             TaskList.FormattingEnabled = true;
+            TaskList.HorizontalScrollbar = true;
             TaskList.Location = new Point(12, 12);
             TaskList.Name = "TaskList";
-            TaskList.Size = new Size(332, 204);
+            TaskList.Size = new Size(351, 224);
             TaskList.TabIndex = 0;
+            TaskList.ValueMember = "Key";
             // 
             // addButton
             // 
-            addButton.Location = new Point(364, 176);
+            addButton.Location = new Point(381, 68);
             addButton.Name = "addButton";
             addButton.Size = new Size(160, 40);
             addButton.TabIndex = 1;
@@ -59,7 +64,7 @@
             // 
             // textBox
             // 
-            textBox.Location = new Point(364, 55);
+            textBox.Location = new Point(381, 35);
             textBox.Name = "textBox";
             textBox.Size = new Size(160, 27);
             textBox.TabIndex = 2;
@@ -67,15 +72,15 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(480, 12);
+            label1.Location = new Point(381, 12);
             label1.Name = "label1";
-            label1.Size = new Size(50, 20);
+            label1.Size = new Size(69, 20);
             label1.TabIndex = 3;
-            label1.Text = "label1";
+            label1.Text = "Task Title";
             // 
             // detailsButton
             // 
-            detailsButton.Location = new Point(12, 222);
+            detailsButton.Location = new Point(12, 242);
             detailsButton.Name = "detailsButton";
             detailsButton.Size = new Size(94, 29);
             detailsButton.TabIndex = 4;
@@ -92,12 +97,20 @@
             ErrorTimer.Tag = "";
             ErrorTimer.Tick += ErrorTimer_Tick;
             // 
+            // monthCalendar1
+            // 
+            monthCalendar1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            monthCalendar1.Location = new Point(662, 12);
+            monthCalendar1.Name = "monthCalendar1";
+            monthCalendar1.TabIndex = 5;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
             ClientSize = new Size(942, 493);
+            Controls.Add(monthCalendar1);
             Controls.Add(detailsButton);
             Controls.Add(label1);
             Controls.Add(textBox);
@@ -120,5 +133,6 @@
         private Button detailsButton;
         private ErrorProvider NoItemSelectedError;
         private System.Windows.Forms.Timer ErrorTimer;
+        private MonthCalendar monthCalendar1;
     }
 }

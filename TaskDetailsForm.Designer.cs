@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             TaskDetailsText = new TextBox();
+            AddDetailsButton = new Button();
             SuspendLayout();
             // 
             // TaskDetailsText
@@ -40,13 +41,25 @@
             TaskDetailsText.ReadOnly = true;
             TaskDetailsText.Size = new Size(438, 209);
             TaskDetailsText.TabIndex = 0;
+            TaskDetailsText.Enter += TaskDetailsText_Enter;
+            // 
+            // AddDetailsButton
+            // 
+            AddDetailsButton.Location = new Point(12, 227);
+            AddDetailsButton.Name = "AddDetailsButton";
+            AddDetailsButton.Size = new Size(100, 30);
+            AddDetailsButton.TabIndex = 1;
+            AddDetailsButton.Text = "Add Details";
+            AddDetailsButton.UseVisualStyleBackColor = true;
+            AddDetailsButton.Click += AddDetailsButton_Click;
             // 
             // TaskDetailsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
-            ClientSize = new Size(462, 223);
+            ClientSize = new Size(462, 263);
+            Controls.Add(AddDetailsButton);
             Controls.Add(TaskDetailsText);
             Name = "TaskDetailsForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -58,5 +71,6 @@
         #endregion
 
         private TextBox TaskDetailsText;
+        private Button AddDetailsButton;
     }
 }

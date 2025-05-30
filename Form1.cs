@@ -21,9 +21,9 @@ namespace TaskManager
         {
             bool titleExists = false;
             string newTitle = textBox.Text;
-            foreach (var task in TaskManagerData.taskList.Values)
+            foreach (var task in TaskManagerData.taskDictionary.Values)
             {
-                if (task == newTitle)
+                if (task.Title == newTitle)
                 {
                     titleExists = true;
                     break;
@@ -34,7 +34,7 @@ namespace TaskManager
             {
                 if (!titleExists)
                 {
-                    TaskList.Items.Add(taskManagerData.AddTask(textBox.Text));
+                    taskManagerData.AddTaskToList(textBox.Text, TaskList);
                 }
                 textBox.Clear();
             }
@@ -45,7 +45,7 @@ namespace TaskManager
             if (TaskList.SelectedItem != null)
             {
                 TaskDetailsForm taskDetailsForm = new TaskDetailsForm();
-                taskDetailsForm.DisplayDetails(taskManagerData.ReturnDetails("Bob"));
+                taskDetailsForm.SetTaskDetails(taskManagerData.ReturnDetails("Bob"));
                 taskDetailsForm.Show();
             }
             else
@@ -55,7 +55,7 @@ namespace TaskManager
             }
         }
 
-        private void ErrorTimer_Tick(object sender, EventArgs e)
+        private void ErrorTimer_Tick(object? sender, EventArgs e)
         {
             NoItemSelectedError.SetError(TaskList, "");
             ErrorTimer.Stop();
