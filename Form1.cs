@@ -6,11 +6,15 @@ namespace TaskManager
     public partial class Form1 : Form
     {
         TaskManagerData taskManagerData;
+        TaskDetailsForm taskDetailsForm;
         public Form1()
         {
             InitializeComponent();
             // Make a reference to the TaskManagerData class
             taskManagerData = new TaskManagerData();
+
+            // Make a reference to the TaskDetailsForm class
+            taskDetailsForm = new TaskDetailsForm();
 
             // Initialize timer
             ErrorTimer.Interval = 5000;
@@ -44,9 +48,12 @@ namespace TaskManager
         {
             if (TaskList.SelectedItem != null)
             {
-                TaskDetailsForm taskDetailsForm = new TaskDetailsForm();
-                taskDetailsForm.SetTaskDetails(taskManagerData.ReturnDetails("Bob"));
-                taskDetailsForm.Show();
+                // Get the key of the selected item
+                var selectedPair = (KeyValuePair<int, string>)TaskList.SelectedItem;
+                int key = selectedPair.Key;
+
+                taskDetailsForm.GetTaskKey(key);
+                taskDetailsForm.ShowDialog();
             }
             else
             {

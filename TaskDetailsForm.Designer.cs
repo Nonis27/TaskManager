@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             TaskDetailsText = new TextBox();
             AddDetailsButton = new Button();
+            TaskDetailsTextNullError = new ErrorProvider(components);
+            NullTextErrorTimer = new System.Windows.Forms.Timer(components);
+            ((System.ComponentModel.ISupportInitialize)TaskDetailsTextNullError).BeginInit();
             SuspendLayout();
             // 
             // TaskDetailsText
@@ -38,10 +42,8 @@
             TaskDetailsText.Location = new Point(12, 12);
             TaskDetailsText.Multiline = true;
             TaskDetailsText.Name = "TaskDetailsText";
-            TaskDetailsText.ReadOnly = true;
             TaskDetailsText.Size = new Size(438, 209);
             TaskDetailsText.TabIndex = 0;
-            TaskDetailsText.Enter += TaskDetailsText_Enter;
             // 
             // AddDetailsButton
             // 
@@ -52,6 +54,16 @@
             AddDetailsButton.Text = "Add Details";
             AddDetailsButton.UseVisualStyleBackColor = true;
             AddDetailsButton.Click += AddDetailsButton_Click;
+            // 
+            // TaskDetailsTextNullError
+            // 
+            TaskDetailsTextNullError.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            TaskDetailsTextNullError.ContainerControl = this;
+            // 
+            // NullTextErrorTimer
+            // 
+            NullTextErrorTimer.Interval = 4000;
+            NullTextErrorTimer.Tick += NullTextErrorTimer_Tick;
             // 
             // TaskDetailsForm
             // 
@@ -64,6 +76,7 @@
             Name = "TaskDetailsForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TaskDetails";
+            ((System.ComponentModel.ISupportInitialize)TaskDetailsTextNullError).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -72,5 +85,7 @@
 
         private TextBox TaskDetailsText;
         private Button AddDetailsButton;
+        private ErrorProvider TaskDetailsTextNullError;
+        private System.Windows.Forms.Timer NullTextErrorTimer;
     }
 }

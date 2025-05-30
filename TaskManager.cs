@@ -37,10 +37,5 @@ namespace TaskManager
             var pair = new KeyValuePair<int, string>(NextId, title);
             listBox.Items.Add(pair);
         }
-
-        public string ReturnDetails(string details)
-        {
-            return details;
-        }
     }
 }

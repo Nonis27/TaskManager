@@ -4,44 +4,76 @@ namespace TaskManager
 {
     public partial class TaskDetailsForm : Form
     {
+        TaskManagerData taskManagerData;
+        int Key;
         public TaskDetailsForm()
         {
             InitializeComponent();
+            taskManagerData = new TaskManagerData();
         }
 
-        public void SetTaskDetails(string details)
+        public void GetTaskKey(int key)
         {
-            if (TaskDetailsText != null)
+            Key = key;
+            if (TaskManagerData.taskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
             {
-                TaskDetailsText.Text = details;
+                TaskDetailsText.Text = taskInfo.Details;
+                AddDetailsButton.Enabled = string.IsNullOrEmpty(taskInfo.Details);
+            }
+            else
+            {
+                TaskDetailsText.Text = string.Empty;
+                AddDetailsButton.Enabled = false;
+                MessageBox.Show($"Task with key: {Key} not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Sorry for the spageti code :(
         private void AddDetailsButton_Click(object sender, EventArgs e)
         {
             if (TaskDetailsText != null)
             {
-                if (!string.IsNullOrEmpty(TaskDetailsText.Text))
+                if (TaskManagerData.taskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
                 {
-                    MessageBox.Show("Task has already some details", "Task has details", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (string.IsNullOrEmpty(taskInfo.Details))
+                    {
+                        if (!string.IsNullOrWhiteSpace(TaskDetailsText.Text))
+                        {
+                            taskInfo.Details = TaskDetailsText.Text;
+
+                            // Update the Dictionary and disable the add details button
+                            TaskManagerData.taskDictionary[Key] = taskInfo;
+                            AddDetailsButton.Enabled = false;
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter details before adding.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The task already has details", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        AddDetailsButton.Enabled = false;
+                    }
                 }
                 else
                 {
-                    TaskDetailsText.ReadOnly = false;
+                    MessageBox.Show($"There is now task assigned to the key {Key}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            else
+            {
+                // The control is that because the list is null in this case
+                TaskDetailsTextNullError.SetError(AddDetailsButton, "Task Details are null");
+                NullTextErrorTimer.Start();
+            }
         }
-        private void TaskDetailsText_Enter(object sender, EventArgs e)
+
+        private void NullTextErrorTimer_Tick(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TaskDetailsText.Text))
-            {
-                MessageBox.Show("You need to add some details for the task", "Details Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (!string.IsNullOrWhiteSpace(TaskDetailsText.Text))
-            {
-                TaskDetailsText.ReadOnly = true;
-            }
-            
+            TaskDetailsTextNullError.SetError(TaskDetailsText, "");
+            NullTextErrorTimer.Stop();
         }
     }
 }
