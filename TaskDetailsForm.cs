@@ -75,5 +75,13 @@ namespace TaskManager
             TaskDetailsTextNullError.SetError(TaskDetailsText, "");
             NullTextErrorTimer.Stop();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (TaskDetailsForm.ActiveForm != null)
+            {
+                TaskDetailsForm.ActiveForm.Close();
+            }
+        }
     }
 }

@@ -33,6 +33,7 @@
             AddDetailsButton = new Button();
             TaskDetailsTextNullError = new ErrorProvider(components);
             NullTextErrorTimer = new System.Windows.Forms.Timer(components);
+            ExitButton = new Button();
             ((System.ComponentModel.ISupportInitialize)TaskDetailsTextNullError).BeginInit();
             SuspendLayout();
             // 
@@ -65,12 +66,23 @@
             NullTextErrorTimer.Interval = 4000;
             NullTextErrorTimer.Tick += NullTextErrorTimer_Tick;
             // 
+            // ExitButton
+            // 
+            ExitButton.Location = new Point(350, 227);
+            ExitButton.Name = "ExitButton";
+            ExitButton.Size = new Size(100, 30);
+            ExitButton.TabIndex = 2;
+            ExitButton.Text = "Exit";
+            ExitButton.UseVisualStyleBackColor = true;
+            ExitButton.Click += button1_Click;
+            // 
             // TaskDetailsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
             ClientSize = new Size(462, 263);
+            Controls.Add(ExitButton);
             Controls.Add(AddDetailsButton);
             Controls.Add(TaskDetailsText);
             Name = "TaskDetailsForm";
@@ -87,5 +99,6 @@
         private Button AddDetailsButton;
         private ErrorProvider TaskDetailsTextNullError;
         private System.Windows.Forms.Timer NullTextErrorTimer;
+        private Button ExitButton;
     }
 }
