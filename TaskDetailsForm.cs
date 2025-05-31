@@ -18,7 +18,9 @@ namespace TaskManager
             if (TaskManagerData.taskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
             {
                 TaskDetailsText.Text = taskInfo.Details;
-                AddDetailsButton.Enabled = string.IsNullOrEmpty(taskInfo.Details);
+                bool taskHasDetails = string.IsNullOrEmpty(taskInfo.Details);
+                AddDetailsButton.Enabled = taskHasDetails;
+                AddDetailsButton.Visible = taskHasDetails;
             }
             else
             {
@@ -44,7 +46,7 @@ namespace TaskManager
                             // Update the Dictionary and disable the add details button
                             TaskManagerData.taskDictionary[Key] = taskInfo;
                             AddDetailsButton.Enabled = false;
-
+                            AddDetailsButton.Visible = false;
                         }
                         else
                         {
@@ -55,6 +57,7 @@ namespace TaskManager
                     {
                         MessageBox.Show("The task already has details", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         AddDetailsButton.Enabled = false;
+                        AddDetailsButton.Visible = false;
                     }
                 }
                 else
