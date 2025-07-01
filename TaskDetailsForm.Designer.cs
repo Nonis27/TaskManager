@@ -30,10 +30,10 @@
         {
             components = new System.ComponentModel.Container();
             TaskDetailsText = new TextBox();
-            AddDetailsButton = new Button();
             TaskDetailsTextNullError = new ErrorProvider(components);
             NullTextErrorTimer = new System.Windows.Forms.Timer(components);
             ExitButton = new Button();
+            AddDetailsButton = new Button();
             ((System.ComponentModel.ISupportInitialize)TaskDetailsTextNullError).BeginInit();
             SuspendLayout();
             // 
@@ -45,16 +45,6 @@
             TaskDetailsText.Name = "TaskDetailsText";
             TaskDetailsText.Size = new Size(438, 209);
             TaskDetailsText.TabIndex = 0;
-            // 
-            // AddDetailsButton
-            // 
-            AddDetailsButton.Location = new Point(12, 227);
-            AddDetailsButton.Name = "AddDetailsButton";
-            AddDetailsButton.Size = new Size(100, 30);
-            AddDetailsButton.TabIndex = 1;
-            AddDetailsButton.Text = "Add Details";
-            AddDetailsButton.UseVisualStyleBackColor = true;
-            AddDetailsButton.Click += AddDetailsButton_Click;
             // 
             // TaskDetailsTextNullError
             // 
@@ -74,7 +64,17 @@
             ExitButton.TabIndex = 2;
             ExitButton.Text = "Exit";
             ExitButton.UseVisualStyleBackColor = true;
-            ExitButton.Click += button1_Click;
+            ExitButton.Click += ExitButton_Click;
+            // 
+            // AddDetailsButton
+            // 
+            AddDetailsButton.Location = new Point(12, 228);
+            AddDetailsButton.Name = "AddDetailsButton";
+            AddDetailsButton.Size = new Size(100, 30);
+            AddDetailsButton.TabIndex = 3;
+            AddDetailsButton.Text = "Add Details";
+            AddDetailsButton.UseVisualStyleBackColor = true;
+            AddDetailsButton.Click += AddDetailsButton_Click;
             // 
             // TaskDetailsForm
             // 
@@ -82,8 +82,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
             ClientSize = new Size(462, 263);
-            Controls.Add(ExitButton);
             Controls.Add(AddDetailsButton);
+            Controls.Add(ExitButton);
             Controls.Add(TaskDetailsText);
             Name = "TaskDetailsForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -96,9 +96,9 @@
         #endregion
 
         private TextBox TaskDetailsText;
-        private Button AddDetailsButton;
         private ErrorProvider TaskDetailsTextNullError;
         private System.Windows.Forms.Timer NullTextErrorTimer;
         private Button ExitButton;
+        private Button AddDetailsButton;
     }
 }

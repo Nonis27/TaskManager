@@ -80,7 +80,7 @@
             // 
             // detailsButton
             // 
-            detailsButton.Location = new Point(12, 242);
+            detailsButton.Location = new Point(269, 242);
             detailsButton.Name = "detailsButton";
             detailsButton.Size = new Size(94, 29);
             detailsButton.TabIndex = 4;

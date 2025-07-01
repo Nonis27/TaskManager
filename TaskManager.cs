@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 
 namespace TaskManager
 {
@@ -11,11 +12,13 @@ namespace TaskManager
         {
             public string Title;
             public string Details;
+            public int InitializeDetails; // More than 1 means that details have been initialized
 
-            public TaskInfo(string title, string details)
+            public TaskInfo(string title, string details, int initDetails)
             {
                 Title = title;
                 Details = details;
+                InitializeDetails = initDetails;
             }
         }
 
@@ -30,7 +33,7 @@ namespace TaskManager
         {
             // Add task title to Dictionary
             NextId++;
-            taskDictionary[NextId] = new TaskInfo(title, "");
+            taskDictionary[NextId] = new TaskInfo(title, "", 0);
 
             // Return the value for the list
             var pair = new KeyValuePair<int, string>(NextId, title);

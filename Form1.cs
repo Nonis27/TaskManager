@@ -53,6 +53,7 @@ namespace TaskManager
                 int key = selectedPair.Key;
 
                 taskDetailsForm.GetTaskKey(key);
+                taskDetailsForm.SetDetailsButtonText(key);
                 taskDetailsForm.ShowDialog();
             }
             else
