@@ -73,6 +73,12 @@ namespace TaskManager
 
                         // Update the Dictionary and disable the add details button
                         TaskManagerData.taskDictionary[Key] = taskInfo;
+
+                        // Close the window
+                        if (TaskDetailsForm.ActiveForm != null)
+                        {
+                            TaskDetailsForm.ActiveForm.Close();
+                        }
                     }
                     else
                     {
