@@ -13,12 +13,12 @@ namespace TaskManager
             public string Title;
             public string Details;
             public int InitializeDetails; // More than 1 means that details have been initialized
-
-            public TaskInfo(string title, string details, int initDetails)
+            public DateTime TaskDueDate;
+            public TaskInfo(string title, string details, DateTime taskDueDate)
             {
                 Title = title;
                 Details = details;
-                InitializeDetails = initDetails;
+                TaskDueDate = taskDueDate;
             }
         }
 
@@ -29,11 +29,11 @@ namespace TaskManager
             NextId = nextId;
         }
 
-        public void AddTaskToList(string title, ListBox listBox)
+        public void AddTaskToList(string title, ListBox listBox, DateTime taskDueDate)
         {
             // Add task title to Dictionary
             NextId++;
-            taskDictionary[NextId] = new TaskInfo(title, "", 0);
+            taskDictionary[NextId] = new TaskInfo(title, "", taskDueDate);
 
             // Return the value for the list
             var pair = new KeyValuePair<int, string>(NextId, title);

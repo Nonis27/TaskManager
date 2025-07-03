@@ -70,7 +70,7 @@
             // 
             AddDetailsButton.Location = new Point(12, 228);
             AddDetailsButton.Name = "AddDetailsButton";
-            AddDetailsButton.Size = new Size(100, 30);
+            AddDetailsButton.Size = new Size(108, 30);
             AddDetailsButton.TabIndex = 3;
             AddDetailsButton.Text = "Add Details";
             AddDetailsButton.UseVisualStyleBackColor = true;

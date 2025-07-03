@@ -1,6 +1,6 @@
 ﻿namespace TaskManager
 {
-    partial class Form1
+    partial class TaskManagerForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,13 +30,15 @@
         {
             components = new System.ComponentModel.Container();
             TaskList = new ListBox();
-            addButton = new Button();
+            AddTaskButton = new Button();
             textBox = new TextBox();
-            label1 = new Label();
+            TaskTitleLabel = new Label();
             detailsButton = new Button();
             NoItemSelectedError = new ErrorProvider(components);
             ErrorTimer = new System.Windows.Forms.Timer(components);
-            monthCalendar1 = new MonthCalendar();
+            MonthCalendar = new MonthCalendar();
+            TaskDateTimePicker = new DateTimePicker();
+            DueDateLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)NoItemSelectedError).BeginInit();
             SuspendLayout();
             // 
@@ -48,41 +50,41 @@
             TaskList.HorizontalScrollbar = true;
             TaskList.Location = new Point(12, 12);
             TaskList.Name = "TaskList";
-            TaskList.Size = new Size(351, 224);
+            TaskList.Size = new Size(460, 264);
             TaskList.TabIndex = 0;
             TaskList.ValueMember = "Key";
             // 
-            // addButton
+            // AddTaskButton
             // 
-            addButton.Location = new Point(381, 68);
-            addButton.Name = "addButton";
-            addButton.Size = new Size(160, 40);
-            addButton.TabIndex = 1;
-            addButton.Text = "Add Task";
-            addButton.UseVisualStyleBackColor = true;
-            addButton.Click += addButton_Click;
+            AddTaskButton.Location = new Point(637, 121);
+            AddTaskButton.Name = "AddTaskButton";
+            AddTaskButton.Size = new Size(91, 30);
+            AddTaskButton.TabIndex = 1;
+            AddTaskButton.Text = "Add Task";
+            AddTaskButton.UseVisualStyleBackColor = true;
+            AddTaskButton.Click += AddTaskButton_Click;
             // 
             // textBox
             // 
-            textBox.Location = new Point(381, 35);
+            textBox.Location = new Point(478, 35);
             textBox.Name = "textBox";
-            textBox.Size = new Size(160, 27);
+            textBox.Size = new Size(250, 27);
             textBox.TabIndex = 2;
             // 
-            // label1
+            // TaskTitleLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(381, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(69, 20);
-            label1.TabIndex = 3;
-            label1.Text = "Task Title";
+            TaskTitleLabel.AutoSize = true;
+            TaskTitleLabel.Location = new Point(478, 12);
+            TaskTitleLabel.Name = "TaskTitleLabel";
+            TaskTitleLabel.Size = new Size(69, 20);
+            TaskTitleLabel.TabIndex = 3;
+            TaskTitleLabel.Text = "Task Title";
             // 
             // detailsButton
             // 
-            detailsButton.Location = new Point(269, 242);
+            detailsButton.Location = new Point(478, 121);
             detailsButton.Name = "detailsButton";
-            detailsButton.Size = new Size(94, 29);
+            detailsButton.Size = new Size(91, 30);
             detailsButton.TabIndex = 4;
             detailsButton.Text = "See Details";
             detailsButton.UseVisualStyleBackColor = true;
@@ -97,26 +99,45 @@
             ErrorTimer.Tag = "";
             ErrorTimer.Tick += ErrorTimer_Tick;
             // 
-            // monthCalendar1
+            // MonthCalendar
             // 
-            monthCalendar1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            monthCalendar1.Location = new Point(662, 12);
-            monthCalendar1.Name = "monthCalendar1";
-            monthCalendar1.TabIndex = 5;
+            MonthCalendar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            MonthCalendar.Location = new Point(982, 12);
+            MonthCalendar.Name = "MonthCalendar";
+            MonthCalendar.TabIndex = 5;
             // 
-            // Form1
+            // TaskDateTimePicker
+            // 
+            TaskDateTimePicker.Location = new Point(478, 88);
+            TaskDateTimePicker.Name = "TaskDateTimePicker";
+            TaskDateTimePicker.Size = new Size(250, 27);
+            TaskDateTimePicker.TabIndex = 6;
+            TaskDateTimePicker.Value = new DateTime(2025, 7, 2, 22, 36, 59, 0);
+            // 
+            // DueDateLabel
+            // 
+            DueDateLabel.AutoSize = true;
+            DueDateLabel.Location = new Point(478, 65);
+            DueDateLabel.Name = "DueDateLabel";
+            DueDateLabel.Size = new Size(72, 20);
+            DueDateLabel.TabIndex = 7;
+            DueDateLabel.Text = "Due Date";
+            // 
+            // TaskManagerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.WindowFrame;
-            ClientSize = new Size(942, 493);
-            Controls.Add(monthCalendar1);
+            BackColor = SystemColors.AppWorkspace;
+            ClientSize = new Size(1262, 673);
+            Controls.Add(DueDateLabel);
+            Controls.Add(TaskDateTimePicker);
+            Controls.Add(MonthCalendar);
             Controls.Add(detailsButton);
-            Controls.Add(label1);
+            Controls.Add(TaskTitleLabel);
             Controls.Add(textBox);
-            Controls.Add(addButton);
+            Controls.Add(AddTaskButton);
             Controls.Add(TaskList);
-            Name = "Form1";
+            Name = "TaskManagerForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Task Manager";
             ((System.ComponentModel.ISupportInitialize)NoItemSelectedError).EndInit();
@@ -127,12 +148,14 @@
         #endregion
 
         private ListBox TaskList;
-        private Button addButton;
+        private Button AddTaskButton;
         private TextBox textBox;
-        private Label label1;
+        private Label TaskTitleLabel;
         private Button detailsButton;
         private ErrorProvider NoItemSelectedError;
         private System.Windows.Forms.Timer ErrorTimer;
-        private MonthCalendar monthCalendar1;
+        private MonthCalendar MonthCalendar;
+        private Label DueDateLabel;
+        private DateTimePicker TaskDateTimePicker;
     }
 }

@@ -3,11 +3,11 @@ using System;
 
 namespace TaskManager
 {
-    public partial class Form1 : Form
+    public partial class TaskManagerForm : Form
     {
         TaskManagerData taskManagerData;
         TaskDetailsForm taskDetailsForm;
-        public Form1()
+        public TaskManagerForm()
         {
             InitializeComponent();
             // Make a reference to the TaskManagerData class
@@ -19,12 +19,19 @@ namespace TaskManager
             // Initialize timer
             ErrorTimer.Interval = 5000;
             ErrorTimer.Tick += ErrorTimer_Tick;
+
+            // Set the Date of TaskDateTimePicker as today
+            TaskDateTimePicker.Value = DateTime.Now;
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void AddTaskButton_Click(object sender, EventArgs e)
         {
             bool titleExists = false;
+            bool validDate = false;
             string newTitle = textBox.Text;
+            DateTime taskDueDate = DateTime.Now.Date;
+
+            // Check if the title exists and if the date is valid
             foreach (var task in TaskManagerData.taskDictionary.Values)
             {
                 if (task.Title == newTitle)
@@ -34,13 +41,40 @@ namespace TaskManager
                 }
             }
 
+            if (TaskDateTimePicker != null)
+            {
+                if (TaskDateTimePicker.Value.Date == DateTime.Now.Date)
+                {
+                    validDate = false;
+                    MessageBox.Show("The date you selected is today.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (TaskDateTimePicker.Value.Date <  DateTime.Now.Date)
+                {
+                    validDate = false;
+                    MessageBox.Show("You can't select a past date.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    taskDueDate = TaskDateTimePicker.Value.Date;
+                    validDate = true;
+                }
+            }
+
             if (!string.IsNullOrWhiteSpace(textBox.Text))
             {
-                if (!titleExists)
+                if (!titleExists && validDate && taskDueDate != DateTime.Now.Date)
                 {
-                    taskManagerData.AddTaskToList(textBox.Text, TaskList);
+                    // Save the task title and the due date
+                    taskManagerData.AddTaskToList(textBox.Text, TaskList, taskDueDate);
+
+                    // Highlight the due date in the month calendar
+                    MonthCalendar.AddBoldedDate(taskDueDate);
+                    MonthCalendar.UpdateBoldedDates();
+
+                    // Clear the text in textBox and reset TaskDateTimePicker
+                    textBox.Clear();
+                    TaskDateTimePicker.Value = DateTime.Now;
                 }
-                textBox.Clear();
             }
         }
 

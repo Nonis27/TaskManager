@@ -18,9 +18,6 @@ namespace TaskManager
             if (TaskManagerData.taskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
             {
                 TaskDetailsText.Text = taskInfo.Details;
-                /*bool taskHasDetails = string.IsNullOrEmpty(taskInfo.Details);
-                AddDetailsButton.Enabled = taskHasDetails;
-                AddDetailsButton.Visible = taskHasDetails;*/
             }
             else
             {
@@ -54,7 +51,7 @@ namespace TaskManager
                 }
                 else
                 {
-                    AddDetailsButton.Text = "Edit Details";
+                    AddDetailsButton.Text = "Save Changes";
                 }
             }
             // Else already exists in GetTaskKey function
