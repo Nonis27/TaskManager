@@ -48,7 +48,7 @@ namespace TaskManager
                     validDate = false;
                     MessageBox.Show("The date you selected is today.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                else if (TaskDateTimePicker.Value.Date <  DateTime.Now.Date)
+                else if (TaskDateTimePicker.Value.Date < DateTime.Now.Date)
                 {
                     validDate = false;
                     MessageBox.Show("You can't select a past date.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -73,7 +73,14 @@ namespace TaskManager
 
                     // Clear the text in textBox and reset TaskDateTimePicker
                     textBox.Clear();
-                    TaskDateTimePicker.Value = DateTime.Now;
+                    if (TaskDateTimePicker != null)
+                    {
+                        TaskDateTimePicker.Value = DateTime.Now;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unexpected Error, couldn't change TaskDateTimePicker value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -101,6 +108,31 @@ namespace TaskManager
         {
             NoItemSelectedError.SetError(TaskList, "");
             ErrorTimer.Stop();
+        }
+
+        private void MonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateTime selectedDate = MonthCalendar.SelectionStart.Date;
+            bool isBolded = MonthCalendar.BoldedDates.Any(d => d.Date == selectedDate);
+
+            if (isBolded)
+            {
+                string text = "";
+
+                // Iterate through everytask in taskDictionary
+                foreach (var task in TaskManagerData.taskDictionary.Values)
+                {
+                    if (task.TaskDueDate == selectedDate)
+                    {
+                        text += $"-{task.Title}{Environment.NewLine}";
+                    }
+                }
+                MessageBox.Show(text, selectedDate.ToShortDateString());
+            }
+            else
+            {
+
+            }
         }
     }
 }

@@ -103,8 +103,10 @@
             // 
             MonthCalendar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             MonthCalendar.Location = new Point(982, 12);
+            MonthCalendar.MaxSelectionCount = 1;
             MonthCalendar.Name = "MonthCalendar";
             MonthCalendar.TabIndex = 5;
+            MonthCalendar.DateSelected += MonthCalendar_DateSelected;
             // 
             // TaskDateTimePicker
             // 
