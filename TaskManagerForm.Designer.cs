@@ -39,6 +39,7 @@
             MonthCalendar = new MonthCalendar();
             TaskDateTimePicker = new DateTimePicker();
             DueDateLabel = new Label();
+            CloseButton = new Button();
             ((System.ComponentModel.ISupportInitialize)NoItemSelectedError).BeginInit();
             SuspendLayout();
             // 
@@ -125,12 +126,23 @@
             DueDateLabel.TabIndex = 7;
             DueDateLabel.Text = "Due Date";
             // 
+            // CloseButton
+            // 
+            CloseButton.Location = new Point(1154, 631);
+            CloseButton.Name = "CloseButton";
+            CloseButton.Size = new Size(90, 30);
+            CloseButton.TabIndex = 8;
+            CloseButton.Text = "Close";
+            CloseButton.UseVisualStyleBackColor = true;
+            CloseButton.Click += CloseButton_Click;
+            // 
             // TaskManagerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(1262, 673);
+            Controls.Add(CloseButton);
             Controls.Add(DueDateLabel);
             Controls.Add(TaskDateTimePicker);
             Controls.Add(MonthCalendar);
@@ -159,5 +171,6 @@
         private MonthCalendar MonthCalendar;
         private Label DueDateLabel;
         private DateTimePicker TaskDateTimePicker;
+        private Button CloseButton;
     }
 }

@@ -15,7 +15,7 @@ namespace TaskManager
         public void GetTaskKey(int key)
         {
             Key = key;
-            if (TaskManagerData.taskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
+            if (TaskManagerData.TaskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
             {
                 TaskDetailsText.Text = taskInfo.Details;
             }
@@ -43,7 +43,7 @@ namespace TaskManager
 
         public void SetDetailsButtonText(int key)
         {
-            if (TaskManagerData.taskDictionary.TryGetValue(key, out TaskManagerData.TaskInfo taskInfo))
+            if (TaskManagerData.TaskDictionary.TryGetValue(key, out TaskManagerData.TaskInfo taskInfo))
             {
                 if (taskInfo.InitializeDetails < 1)
                 {
@@ -61,7 +61,7 @@ namespace TaskManager
         {
             if (TaskDetailsText != null)
             {
-                if (TaskManagerData.taskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
+                if (TaskManagerData.TaskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
                 {
                     if (!string.IsNullOrWhiteSpace(TaskDetailsText.Text))
                     {
@@ -69,7 +69,7 @@ namespace TaskManager
                         taskInfo.InitializeDetails += 1;
 
                         // Update the Dictionary and disable the add details button
-                        TaskManagerData.taskDictionary[Key] = taskInfo;
+                        TaskManagerData.TaskDictionary[Key] = taskInfo;
 
                         // Close the window
                         if (TaskDetailsForm.ActiveForm != null)

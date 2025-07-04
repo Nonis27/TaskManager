@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
+using System.Text.Json;
+using System.IO;
 
 namespace TaskManager
 {
     public class TaskManagerData
     {
         int NextId;
+        string filename = "Tasks.json";
 
         public struct TaskInfo
         {
-            public string Title;
-            public string Details;
-            public int InitializeDetails; // More than 1 means that details have been initialized
-            public DateTime TaskDueDate;
+            public string Title { get; set; }
+            public string Details { get; set; }
+            public int InitializeDetails { get; set; } // More than 1 means that details have been initialized
+            public DateTime TaskDueDate { get; set; }
             public TaskInfo(string title, string details, DateTime taskDueDate)
             {
                 Title = title;
@@ -22,7 +24,7 @@ namespace TaskManager
             }
         }
 
-        public static Dictionary<int, TaskInfo> taskDictionary = new Dictionary<int, TaskInfo>();
+        public static Dictionary<int, TaskInfo> TaskDictionary { get; set; } = new();
 
         public TaskManagerData(int nextId = 0)
         {
@@ -33,11 +35,52 @@ namespace TaskManager
         {
             // Add task title to Dictionary
             NextId++;
-            taskDictionary[NextId] = new TaskInfo(title, "", taskDueDate);
+            TaskDictionary[NextId] = new TaskInfo(title, "", taskDueDate);
 
             // Return the value for the list
             var pair = new KeyValuePair<int, string>(NextId, title);
             listBox.Items.Add(pair);
+        }
+
+        public void SaveTasks()
+        {
+            string jsonString = JsonSerializer.Serialize(TaskDictionary);
+            File.WriteAllText(filename, jsonString);
+        }
+
+        public void LoadTasks()
+        {
+            if (!File.Exists(filename)) return;
+
+            string jsonString = File.ReadAllText(filename);
+
+            var loadedDict = JsonSerializer.Deserialize<Dictionary<int, TaskInfo>>(jsonString);
+
+           if (loadedDict != null)
+           {
+                TaskDictionary.Clear();
+
+                foreach(var kvp in loadedDict)
+                {
+                    TaskDictionary[kvp.Key] = kvp.Value;
+                }
+
+                if (TaskDictionary.Count > 0)
+                {
+                    NextId = Math.Max(NextId, MaxKey(TaskDictionary));
+                }
+           }
+        }
+
+        public int MaxKey(Dictionary<int, TaskInfo> dict)
+        {
+            int max = 0;
+            foreach (var key in dict.Keys)
+            {
+                if (key > max) max = key;
+            }
+
+            return max;
         }
     }
 }

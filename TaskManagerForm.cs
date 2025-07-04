@@ -10,11 +10,24 @@ namespace TaskManager
         public TaskManagerForm()
         {
             InitializeComponent();
+
             // Make a reference to the TaskManagerData class
             taskManagerData = new TaskManagerData();
 
             // Make a reference to the TaskDetailsForm class
             taskDetailsForm = new TaskDetailsForm();
+
+            // Load all the tasks and refresh listBox
+            taskManagerData.LoadTasks();
+
+            TaskList.Items.Clear();
+            foreach(var kvp in TaskManagerData.TaskDictionary)
+            {
+                TaskList.Items.Add(new KeyValuePair<int, string>(kvp.Key, kvp.Value.Title));
+            }
+
+            UpdateMonthCalendar();
+            MonthCalendar.UpdateBoldedDates();
 
             // Initialize timer
             ErrorTimer.Interval = 5000;
@@ -22,6 +35,14 @@ namespace TaskManager
 
             // Set the Date of TaskDateTimePicker as today
             TaskDateTimePicker.Value = DateTime.Now;
+        }
+
+        public void UpdateMonthCalendar()
+        {
+            foreach(var item in TaskManagerData.TaskDictionary.Values)
+            {
+                MonthCalendar.AddBoldedDate(item.TaskDueDate);
+            }
         }
 
         private void AddTaskButton_Click(object sender, EventArgs e)
@@ -32,7 +53,7 @@ namespace TaskManager
             DateTime taskDueDate = DateTime.Now.Date;
 
             // Check if the title exists and if the date is valid
-            foreach (var task in TaskManagerData.taskDictionary.Values)
+            foreach (var task in TaskManagerData.TaskDictionary.Values)
             {
                 if (task.Title == newTitle)
                 {
@@ -120,7 +141,7 @@ namespace TaskManager
                 string text = "";
 
                 // Iterate through everytask in taskDictionary
-                foreach (var task in TaskManagerData.taskDictionary.Values)
+                foreach (var task in TaskManagerData.TaskDictionary.Values)
                 {
                     if (task.TaskDueDate == selectedDate)
                     {
@@ -131,7 +152,16 @@ namespace TaskManager
             }
             else
             {
+                MessageBox.Show("There are no tasks for the selected date.", selectedDate.ToShortDateString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            taskManagerData.SaveTasks();
+            if (TaskManagerForm.ActiveForm != null)
+            {
+                TaskManagerForm.ActiveForm.Close();
             }
         }
     }
