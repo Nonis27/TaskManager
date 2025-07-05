@@ -96,6 +96,7 @@ namespace TaskManager
                 {
                     // Save the task title and the due date
                     taskManagerData.AddTaskToList(textBox.Text, TaskList, taskDueDate);
+                    RefreshTaskList();
 
                     // Highlight the due date in the month calendar
                     MonthCalendar.AddBoldedDate(taskDueDate);

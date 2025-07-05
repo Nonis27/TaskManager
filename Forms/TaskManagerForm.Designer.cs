@@ -46,7 +46,7 @@
             // 
             // TaskList
             // 
-            TaskList.BackColor = SystemColors.Control;
+            TaskList.BackColor = SystemColors.ControlLightLight;
             TaskList.DisplayMember = "Value";
             TaskList.FormattingEnabled = true;
             TaskList.HorizontalScrollbar = true;
@@ -105,7 +105,7 @@
             // MonthCalendar
             // 
             MonthCalendar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            MonthCalendar.BackColor = SystemColors.Control;
+            MonthCalendar.BackColor = SystemColors.ControlLightLight;
             MonthCalendar.Location = new Point(982, 12);
             MonthCalendar.MaxSelectionCount = 1;
             MonthCalendar.Name = "MonthCalendar";

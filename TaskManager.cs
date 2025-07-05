@@ -31,6 +31,26 @@ namespace TaskManager
             NextId = nextId;
         }
 
+        // Helper functions
+        public int MaxKey(Dictionary<int, TaskInfo> dict)
+        {
+            int max = 0;
+            foreach (var key in dict.Keys)
+            {
+                if (key > max) max = key;
+            }
+
+            return max;
+        }
+
+        public void SetMaxKey()
+        {
+            if (TaskDictionary.Count > 0)
+            {
+                NextId = Math.Max(NextId, MaxKey(TaskDictionary));
+            }
+        }
+
         public void AddTaskToList(string title, ListBox listBox, DateTime taskDueDate)
         {
             // Add task title to Dictionary
@@ -68,25 +88,6 @@ namespace TaskManager
                     TaskDictionary[kvp.Key] = kvp.Value;
                 }
            }
-        }
-
-        public int MaxKey(Dictionary<int, TaskInfo> dict)
-        {
-            int max = 0;
-            foreach (var key in dict.Keys)
-            {
-                if (key > max) max = key;
-            }
-
-            return max;
-        }
-
-        public void SetMaxKey()
-        {
-            if (TaskDictionary.Count > 0)
-            {
-                NextId = Math.Max(NextId, MaxKey(TaskDictionary));
-            }
         }
     }
 }

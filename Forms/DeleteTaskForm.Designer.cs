@@ -31,7 +31,7 @@
             TaskTitleLabel = new Label();
             TaskDueDate = new Label();
             DeleteTaskButton = new Button();
-            CancelButton = new Button();
+            CancelDeleteButton = new Button();
             SuspendLayout();
             // 
             // TaskTitleLabel
@@ -63,15 +63,15 @@
             DeleteTaskButton.UseVisualStyleBackColor = true;
             DeleteTaskButton.Click += DeleteTaskButton_Click;
             // 
-            // CancelButton
+            // CancelDeleteButton
             // 
-            CancelButton.Location = new Point(216, 92);
-            CancelButton.Name = "CancelButton";
-            CancelButton.Size = new Size(74, 29);
-            CancelButton.TabIndex = 3;
-            CancelButton.Text = "Cancel";
-            CancelButton.UseVisualStyleBackColor = true;
-            CancelButton.Click += CancelButton_Click;
+            CancelDeleteButton.Location = new Point(216, 92);
+            CancelDeleteButton.Name = "CancelDeleteButton";
+            CancelDeleteButton.Size = new Size(74, 29);
+            CancelDeleteButton.TabIndex = 3;
+            CancelDeleteButton.Text = "Cancel";
+            CancelDeleteButton.UseVisualStyleBackColor = true;
+            CancelDeleteButton.Click += CancelButton_Click;
             // 
             // DeleteTaskForm
             // 
@@ -79,7 +79,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(302, 133);
-            Controls.Add(CancelButton);
+            Controls.Add(CancelDeleteButton);
             Controls.Add(DeleteTaskButton);
             Controls.Add(TaskDueDate);
             Controls.Add(TaskTitleLabel);
@@ -95,6 +95,6 @@
         private Label TaskTitleLabel;
         private Label TaskDueDate;
         private Button DeleteTaskButton;
-        private Button CancelButton;
+        private Button CancelDeleteButton;
     }
 }
