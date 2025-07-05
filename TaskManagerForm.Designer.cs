@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskManagerForm));
             TaskList = new ListBox();
             AddTaskButton = new Button();
             textBox = new TextBox();
@@ -45,7 +46,7 @@
             // 
             // TaskList
             // 
-            TaskList.BackColor = SystemColors.HighlightText;
+            TaskList.BackColor = SystemColors.Control;
             TaskList.DisplayMember = "Value";
             TaskList.FormattingEnabled = true;
             TaskList.HorizontalScrollbar = true;
@@ -104,10 +105,12 @@
             // MonthCalendar
             // 
             MonthCalendar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            MonthCalendar.BackColor = SystemColors.Control;
             MonthCalendar.Location = new Point(982, 12);
             MonthCalendar.MaxSelectionCount = 1;
             MonthCalendar.Name = "MonthCalendar";
             MonthCalendar.TabIndex = 5;
+            MonthCalendar.TrailingForeColor = SystemColors.ControlDark;
             MonthCalendar.DateSelected += MonthCalendar_DateSelected;
             // 
             // TaskDateTimePicker
@@ -141,7 +144,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.AppWorkspace;
+            BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1262, 673);
             Controls.Add(CloseButton);
             Controls.Add(DueDateLabel);
@@ -152,6 +155,7 @@
             Controls.Add(textBox);
             Controls.Add(AddTaskButton);
             Controls.Add(TaskList);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TaskManagerForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Task Manager";
