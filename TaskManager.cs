@@ -7,7 +7,7 @@ namespace TaskManager
 {
     public class TaskManagerData
     {
-        int NextId;
+        public int NextId;
         string filename = "Tasks.json";
 
         public struct TaskInfo
@@ -24,7 +24,7 @@ namespace TaskManager
             }
         }
 
-        public static Dictionary<int, TaskInfo> TaskDictionary { get; set; } = new();
+        public static Dictionary<int, TaskInfo> TaskDictionary { get; set; } = new Dictionary<int, TaskInfo>();
 
         public TaskManagerData(int nextId = 0)
         {
@@ -44,6 +44,7 @@ namespace TaskManager
 
         public void SaveTasks()
         {
+            File.Delete(filename);
             string jsonString = JsonSerializer.Serialize(TaskDictionary);
             File.WriteAllText(filename, jsonString);
         }
@@ -54,6 +55,8 @@ namespace TaskManager
 
             string jsonString = File.ReadAllText(filename);
 
+            if (string.IsNullOrWhiteSpace(jsonString)) return;
+
             var loadedDict = JsonSerializer.Deserialize<Dictionary<int, TaskInfo>>(jsonString);
 
            if (loadedDict != null)
@@ -63,11 +66,6 @@ namespace TaskManager
                 foreach(var kvp in loadedDict)
                 {
                     TaskDictionary[kvp.Key] = kvp.Value;
-                }
-
-                if (TaskDictionary.Count > 0)
-                {
-                    NextId = Math.Max(NextId, MaxKey(TaskDictionary));
                 }
            }
         }
@@ -81,6 +79,14 @@ namespace TaskManager
             }
 
             return max;
+        }
+
+        public void SetMaxKey()
+        {
+            if (TaskDictionary.Count > 0)
+            {
+                NextId = Math.Max(NextId, MaxKey(TaskDictionary));
+            }
         }
     }
 }

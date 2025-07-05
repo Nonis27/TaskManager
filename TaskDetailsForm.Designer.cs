@@ -39,7 +39,7 @@
             // 
             // TaskDetailsText
             // 
-            TaskDetailsText.BackColor = SystemColors.AppWorkspace;
+            TaskDetailsText.BackColor = SystemColors.Control;
             TaskDetailsText.Location = new Point(12, 12);
             TaskDetailsText.Multiline = true;
             TaskDetailsText.Name = "TaskDetailsText";
@@ -80,7 +80,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.WindowFrame;
+            BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(462, 263);
             Controls.Add(AddDetailsButton);
             Controls.Add(ExitButton);

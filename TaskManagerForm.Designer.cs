@@ -54,6 +54,7 @@
             TaskList.Size = new Size(460, 264);
             TaskList.TabIndex = 0;
             TaskList.ValueMember = "Key";
+            TaskList.MouseDoubleClick += TaskList_MouseDoubleClick;
             // 
             // AddTaskButton
             // 
@@ -160,17 +161,16 @@
         }
 
         #endregion
-
-        private ListBox TaskList;
         private Button AddTaskButton;
         private TextBox textBox;
         private Label TaskTitleLabel;
         private Button detailsButton;
         private ErrorProvider NoItemSelectedError;
         private System.Windows.Forms.Timer ErrorTimer;
-        private MonthCalendar MonthCalendar;
         private Label DueDateLabel;
         private DateTimePicker TaskDateTimePicker;
         private Button CloseButton;
+        public ListBox TaskList;
+        public MonthCalendar MonthCalendar;
     }
 }

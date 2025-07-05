@@ -12,7 +12,7 @@ namespace TaskManager
             taskManagerData = new TaskManagerData();
         }
 
-        public void GetTaskKey(int key)
+        public void SetTaskDetailsText(int key)
         {
             Key = key;
             if (TaskManagerData.TaskDictionary.TryGetValue(Key, out TaskManagerData.TaskInfo taskInfo))
@@ -37,7 +37,7 @@ namespace TaskManager
         {
             if (TaskDetailsForm.ActiveForm != null)
             {
-                TaskDetailsForm.ActiveForm.Close();
+                this.Close();
             }
         }
 

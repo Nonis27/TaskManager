@@ -19,15 +19,10 @@ namespace TaskManager
 
             // Load all the tasks and refresh listBox
             taskManagerData.LoadTasks();
+            taskManagerData.SetMaxKey();
 
-            TaskList.Items.Clear();
-            foreach(var kvp in TaskManagerData.TaskDictionary)
-            {
-                TaskList.Items.Add(new KeyValuePair<int, string>(kvp.Key, kvp.Value.Title));
-            }
-
-            UpdateMonthCalendar();
-            MonthCalendar.UpdateBoldedDates();
+            RefreshTaskList();
+            RefreshMonthCalendar();
 
             // Initialize timer
             ErrorTimer.Interval = 5000;
@@ -37,12 +32,26 @@ namespace TaskManager
             TaskDateTimePicker.Value = DateTime.Now;
         }
 
-        public void UpdateMonthCalendar()
+        public void RefreshTaskList()
         {
-            foreach(var item in TaskManagerData.TaskDictionary.Values)
+            TaskList.Items.Clear();
+            foreach (var kvp in TaskManagerData.TaskDictionary)
+            {
+                TaskList.Items.Add(new KeyValuePair<int, string>(kvp.Key, kvp.Value.Title));
+            }
+
+            TaskList.Refresh();
+        }
+
+        public void RefreshMonthCalendar()
+        {
+            foreach (var item in TaskManagerData.TaskDictionary.Values)
             {
                 MonthCalendar.AddBoldedDate(item.TaskDueDate);
             }
+
+            MonthCalendar.UpdateBoldedDates();
+            MonthCalendar.Refresh();
         }
 
         private void AddTaskButton_Click(object sender, EventArgs e)
@@ -114,7 +123,7 @@ namespace TaskManager
                 var selectedPair = (KeyValuePair<int, string>)TaskList.SelectedItem;
                 int key = selectedPair.Key;
 
-                taskDetailsForm.GetTaskKey(key);
+                taskDetailsForm.SetTaskDetailsText(key);
                 taskDetailsForm.SetDetailsButtonText(key);
                 taskDetailsForm.ShowDialog();
             }
@@ -161,7 +170,33 @@ namespace TaskManager
             taskManagerData.SaveTasks();
             if (TaskManagerForm.ActiveForm != null)
             {
-                TaskManagerForm.ActiveForm.Close();
+                this.Close();
+            }
+        }
+
+        private void TaskList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (TaskList.SelectedItem != null)
+            {
+                var kvp = (KeyValuePair<int, string>)TaskList.SelectedItem;
+                int key = kvp.Key;
+
+                using (DeleteTaskForm deleteTaskForm = new DeleteTaskForm(this))
+                {
+                    if (deleteTaskForm != null)
+                    {
+                        deleteTaskForm.InitializeDeleteFormContent(key);
+                        deleteTaskForm.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error, DeleteTaskForm is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error, no item selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
