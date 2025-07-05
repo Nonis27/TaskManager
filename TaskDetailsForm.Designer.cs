@@ -43,6 +43,7 @@
             TaskDetailsText.Location = new Point(12, 12);
             TaskDetailsText.Multiline = true;
             TaskDetailsText.Name = "TaskDetailsText";
+            TaskDetailsText.ScrollBars = ScrollBars.Vertical;
             TaskDetailsText.Size = new Size(438, 209);
             TaskDetailsText.TabIndex = 0;
             // 
