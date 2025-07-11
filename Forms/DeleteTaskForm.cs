@@ -27,7 +27,7 @@ namespace TaskManager
             }
             else
             {
-                MessageBox.Show($"Task with key: {Key} not found in initialize details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Task with key: {Key} not found in InitializeDeleteFormContent", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -54,7 +54,7 @@ namespace TaskManager
             }
             else
             {
-                MessageBox.Show($"Task with key: {Key} not found is delete task button.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Task with key: {Key} not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

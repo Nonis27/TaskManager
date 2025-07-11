@@ -89,5 +89,21 @@ namespace TaskManager
                 }
            }
         }
+
+        public List<KeyValuePair<int, TaskInfo>> GetTasksSortedByDueDate()
+        {
+            return TaskDictionary.OrderBy(kvp => kvp.Value.TaskDueDate).ToList();
+        }
+
+        public void SortTasks(ListBox listBox)
+        {
+            var sortedItems = GetTasksSortedByDueDate();
+            listBox.Items.Clear();
+
+            foreach(var pair in sortedItems)
+            {
+                listBox.Items.Add(new KeyValuePair<int, string>(pair.Key, pair.Value.Title));
+            }
+        }
     }
 }

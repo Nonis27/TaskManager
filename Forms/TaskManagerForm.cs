@@ -6,7 +6,6 @@ namespace TaskManager
     public partial class TaskManagerForm : Form
     {
         TaskManagerData taskManagerData;
-        TaskDetailsForm taskDetailsForm;
         public TaskManagerForm()
         {
             InitializeComponent();
@@ -14,10 +13,7 @@ namespace TaskManager
             // Make a reference to the TaskManagerData class
             taskManagerData = new TaskManagerData();
 
-            // Make a reference to the TaskDetailsForm class
-            taskDetailsForm = new TaskDetailsForm();
-
-            // Load all the tasks and refresh listBox
+            // Load all the tasks, sort them and refresh TaskList and MonthCalendar
             taskManagerData.LoadTasks();
             taskManagerData.SetMaxKey();
 
@@ -35,7 +31,7 @@ namespace TaskManager
         public void RefreshTaskList()
         {
             TaskList.Items.Clear();
-            foreach (var kvp in TaskManagerData.TaskDictionary)
+            foreach (var kvp in taskManagerData.GetTasksSortedByDueDate())
             {
                 TaskList.Items.Add(new KeyValuePair<int, string>(kvp.Key, kvp.Value.Title));
             }
@@ -124,9 +120,12 @@ namespace TaskManager
                 var selectedPair = (KeyValuePair<int, string>)TaskList.SelectedItem;
                 int key = selectedPair.Key;
 
-                taskDetailsForm.SetTaskDetailsText(key);
-                taskDetailsForm.SetDetailsButtonText(key);
-                taskDetailsForm.ShowDialog();
+                using (TaskDetailsForm taskDetailsForm = new TaskDetailsForm())
+                {
+                    taskDetailsForm.SetTaskDetailsText(key);
+                    taskDetailsForm.SetDetailsButtonText(key);
+                    taskDetailsForm.ShowDialog();
+                }
             }
             else
             {
